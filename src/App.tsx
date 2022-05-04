@@ -1,16 +1,13 @@
-import { Container } from '@mui/material';
 import React from 'react';
+import { Container } from '@mui/material';
 import Bar from './Components/Bar';
-import LoginForm from './Components/LoginForm';
-import { Main } from './Components/Main';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
     <Container>
       <Bar/>
-      <Main>
-        <LoginForm/>
-      </Main>
+      <Outlet/>
     </Container>
   );
 }
