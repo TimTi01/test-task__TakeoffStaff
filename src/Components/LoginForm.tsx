@@ -1,10 +1,13 @@
-import React from 'react'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import React, { useEffect } from 'react'
+import { useForm, Controller, SubmitHandler, FieldError } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, FormControl, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import { IFormInput } from '../Types/FormInputTypes'
+import { useAppDispatch, useAppSelector } from '../hooks/redux'
+import { setAuthUser } from '../features/authSlice'
+import { useNavigate } from 'react-router-dom'
 
 const schema = yup.object().shape({
   email: yup.string().email().required(),
@@ -12,12 +15,26 @@ const schema = yup.object().shape({
 })
 
 export default function LoginForm() {
+  const auth = useAppSelector(state => state.authReducer.authorization)
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    if (auth) {
+      navigate('contacts')
+    }
+  }, [auth])
+
   const {control, handleSubmit, formState: { errors }} = useForm<IFormInput>({
     resolver: yupResolver(schema)
   })
 
   const formSubmitHandler: SubmitHandler<IFormInput> = (data) => {
-    console.log(data);
+    if (!errors.password && !errors.email) {
+      dispatch(setAuthUser(true))
+    } else {
+      dispatch(setAuthUser(false))
+    }
   };
 
   return (
