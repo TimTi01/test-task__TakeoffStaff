@@ -1,0 +1,79 @@
+{
+    "contacts": [
+        {
+        "id": 1,
+        "name": "Ivan",
+        "email": "ivan@mail.com"
+        },
+        {
+        "id": 2,
+        "name": "Tom",
+        "email": "Tom@mail.com"
+        },
+        {
+        "id": 3,
+        "name": "Tim",
+        "email": "Tim@mail.com"
+        },
+        {
+        "id": 4,
+        "name": "Vlad",
+        "email": "Vlad@mail.com"
+        },
+        {
+        "id": 5,
+        "name": "Elen",
+        "email": "elen@mail.com"
+        },
+        {
+        "id": 6,
+        "name": "Inna",
+        "email": "inna@mail.com"
+        },
+        {
+        "id": 7,
+        "name": "Cate",
+        "email": "Cate@mail.com"
+        },
+        {
+        "id": 8,
+        "name": "Otto",
+        "email": "Otto@mail.com"
+        },
+        {
+        "id": 9,
+        "name": "Nik",
+        "email": "Nik@mail.com"
+        },
+        {
+        "id": 10,
+        "name": "Sergey",
+        "email": "Sergey@mail.com"
+        },
+        {
+        "id": 11,
+        "name": "Den",
+        "email": "Den@mail.com"
+        },
+        {
+        "id": 12,
+        "name": "Mark",
+        "email": "mark@mail.com"
+        },
+        {
+        "id": 13,
+        "name": "Eva",
+        "email": "Eva@mail.com"
+        },
+        {
+        "id": 14,
+        "name": "Alex",
+        "email": "Alex@mail.com"
+        },
+        {
+        "id": 15,
+        "name": "Stev",
+        "email": "Stev@mail.com"
+        }
+    ]
+}

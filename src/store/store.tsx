@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authReducer from '../features/authSlice'
+import contactsReducer from '../features/contactsSlice'
 
 const rootReducer = combineReducers({
-    authReducer
+    authReducer,
+    contactsReducer,
 })
 
 export const setupStore = () => {

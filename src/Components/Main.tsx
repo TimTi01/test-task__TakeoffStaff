@@ -8,6 +8,8 @@ export const Main:FC<MainProps> = ({children}) => {
         <Box component='main'
              height='100vh'
              display='flex'
+             flexWrap='wrap'
+             mt={5}
              sx={{
                     justifyContent: 'center',
                     alignItems: 'center'
