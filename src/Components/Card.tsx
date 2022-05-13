@@ -1,14 +1,20 @@
-import React, { FC } from 'react'
-import {Box, Button, Card, CardActions, CardContent, CardMedia, CircularProgress, Grid, Skeleton, Typography } from '@mui/material'
+import React, { FC, useState } from 'react'
+import {Box, Button, Card, CardActions, CardContent, CardMedia, Grid, Typography } from '@mui/material'
+import { UpdateDialogComponent } from './UpdateDialogComponent';
 import { IContacts } from '../Types/ContactsTypes'
-
 
 interface ContactsItemProps {
     contact: IContacts,
     remove: (contact: IContacts) => void,
+    update: (contact: IContacts) => void,
 }
 
-export const ContactCard:FC<ContactsItemProps> = ({contact, remove}) => {
+export const ContactCard:FC<ContactsItemProps> = ({contact, remove, update}) => {
+    const [open, setOpen] = useState(false);
+    
+    const handleClickOpenUpdateDialog = () => {
+        setOpen(true);
+    };
 
     const handleRemove = (e: React.MouseEvent) => {
         e.stopPropagation()
@@ -27,32 +33,38 @@ export const ContactCard:FC<ContactsItemProps> = ({contact, remove}) => {
             <Grid container 
                 direction='column'
             >
-            <Grid item>
-                <CardContent>
-                <Typography variant='subtitle1'>
-                    Name: {contact.name}
-                </Typography>
-                <Typography variant='subtitle1'>
-                    Email: {contact.email}
-                </Typography>
-                </CardContent>
-            </Grid>
-            <Grid item>
-                <CardActions>
-                <Button size="small" 
-                        variant='contained'
-                >
-                    Edit
-                </Button>
-                <Button size="small" 
-                        variant='contained' 
-                        color='error'
-                        onClick={handleRemove}
-                >
-                    Delete
-                </Button>
-                </CardActions>
-            </Grid>
+                <Grid item>
+                    <CardContent>
+                        <Typography variant='subtitle1'>
+                            Name: {contact.name}
+                        </Typography>
+                        <Typography variant='subtitle1'>
+                            Email: {contact.email}
+                        </Typography>
+                    </CardContent>
+                </Grid>
+                <Grid item>
+                    <CardActions>
+                        <Button size="small" 
+                                variant='contained'
+                                onClick={handleClickOpenUpdateDialog}
+                        >
+                            Edit
+                        </Button>
+                        <Button size="small" 
+                                variant='contained' 
+                                color='error'
+                                onClick={handleRemove}
+                        >
+                            Delete
+                        </Button>
+                        <UpdateDialogComponent open={open}
+                                               setOpen={setOpen}
+                                               update={update}
+                                               contact={contact}
+                        />
+                    </CardActions>
+                </Grid>
             </Grid>
         </Card>
     </Box>

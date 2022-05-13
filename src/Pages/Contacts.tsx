@@ -9,6 +9,7 @@ import { IContacts } from '../Types/ContactsTypes'
 export const Contacts = () => {
   const {data: contacts, error, isLoading} = contactAPI.useGetAllContactsQuery(100)
   const [deleteContact, {}] = contactAPI.useDeleteContactMutation() 
+  const [updateContact, {}] = contactAPI.useUpdateContactMutation() 
 
   const handleRemove = (contact: IContacts) => {
     deleteContact(contact)
@@ -21,6 +22,7 @@ export const Contacts = () => {
               <ContactCard key={contact.id}
                            contact={contact}
                            remove={handleRemove}
+                           update={updateContact}
               />
           )}
           {isLoading && <CircularProgress/>}

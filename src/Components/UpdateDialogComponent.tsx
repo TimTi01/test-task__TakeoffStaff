@@ -1,39 +1,30 @@
-import React, { useState } from 'react'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, SpeedDial, SpeedDialIcon, TextField, Tooltip } from '@mui/material';
-import { contactAPI } from '../services/contactService';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, Divider, TextField } from '@mui/material'
+import React, { FC, useState } from 'react'
 import { IContacts } from '../Types/ContactsTypes';
 
-export default function SpeedDialComponent() {
+interface IDialogComponentProps {
+    open: boolean,
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    update: (contact: IContacts) => void,
+    contact: IContacts,
+}
+
+export const UpdateDialogComponent:FC<IDialogComponentProps> = ({open, setOpen, update, contact}) => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [createContact, {}] = contactAPI.useCreateContactMutation()
-    const [open, setOpen] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const handleUpdate = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        update({...contact, name, email})
+        handleClose()
+    }
 
     const handleClose = () => {
         setOpen(false);
     };
 
-    const handleCreate = async () => {
-        await createContact({name, email} as IContacts)
-        handleClose()
-    };
-
     return (
-      <Box>
-          <Tooltip title="Add new contact" arrow>
-            <SpeedDial
-                ariaLabel="SpeedDial basic example"
-                sx={{ position: 'absolute', bottom: 16, right: 16 }}
-                icon={<SpeedDialIcon />}
-                onClick={handleClickOpen}
-            >
-            </SpeedDial>
-          </Tooltip>
-          <Dialog onClose={handleClose} open={open}>
+        <Dialog onClose={handleClose} open={open}>
             <DialogTitle>Subscribe</DialogTitle>
             <Divider/>
             <DialogContent>
@@ -66,12 +57,11 @@ export default function SpeedDialComponent() {
             <DialogActions>
                 <Button 
                         variant='contained' 
-                        onClick={handleCreate}
+                        onClick={handleUpdate}
                 >
                     Create
                 </Button>
             </DialogActions>
-          </Dialog>
-      </Box>
-    );
+    </Dialog>
+    )
 }
