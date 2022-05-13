@@ -22,6 +22,21 @@ export const contactAPI = createApi({
                 body: contact
             }),
             invalidatesTags: ['Create']
-        })
+        }),
+        updateContact: build.mutation<IContacts, IContacts>({
+            query: (contact) => ({
+                url: `contacts/${contact.id}`,
+                method: 'PUT',
+                body: contact
+            }),
+            invalidatesTags: ['Create']
+        }),
+        deleteContact: build.mutation<IContacts, IContacts>({
+            query: (contact) => ({
+                url: `contacts/${contact.id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['Create']
+        }),
     }),
 });

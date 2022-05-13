@@ -5,10 +5,17 @@ import { IContacts } from '../Types/ContactsTypes'
 
 interface ContactsItemProps {
     contact: IContacts,
+    remove: (contact: IContacts) => void,
 }
 
-export const ContactCard:FC<ContactsItemProps> = ({contact}) => {
-  return (
+export const ContactCard:FC<ContactsItemProps> = ({contact, remove}) => {
+
+    const handleRemove = (e: React.MouseEvent) => {
+        e.stopPropagation()
+        remove(contact)
+    }
+
+    return (
     <Box key={contact.id} m={1}>
         <Card sx={{display: 'flex'}} elevation={6}>
             <CardMedia 
@@ -32,12 +39,22 @@ export const ContactCard:FC<ContactsItemProps> = ({contact}) => {
             </Grid>
             <Grid item>
                 <CardActions>
-                <Button size="small" variant='contained'>Edit</Button>
-                <Button size="small" variant='contained' color='error'>Delete</Button>
+                <Button size="small" 
+                        variant='contained'
+                >
+                    Edit
+                </Button>
+                <Button size="small" 
+                        variant='contained' 
+                        color='error'
+                        onClick={handleRemove}
+                >
+                    Delete
+                </Button>
                 </CardActions>
             </Grid>
             </Grid>
         </Card>
     </Box>
-  )
+    )
 }

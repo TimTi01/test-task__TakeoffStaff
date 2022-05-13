@@ -4,9 +4,15 @@ import { contactAPI } from '../services/contactService'
 import {ContactCard} from '../Components/Card'
 import { Alert, AlertTitle, CircularProgress } from '@mui/material'
 import SpeedDialComponent from '../Components/SpeedDialComponent'
+import { IContacts } from '../Types/ContactsTypes'
 
 export const Contacts = () => {
-  const {data: contacts, error, isLoading} = contactAPI.useGetAllContactsQuery(100) 
+  const {data: contacts, error, isLoading} = contactAPI.useGetAllContactsQuery(100)
+  const [deleteContact, {}] = contactAPI.useDeleteContactMutation() 
+
+  const handleRemove = (contact: IContacts) => {
+    deleteContact(contact)
+  }
 
   return (
     <>
@@ -14,6 +20,7 @@ export const Contacts = () => {
           {contacts && contacts.map(contact => 
               <ContactCard key={contact.id}
                            contact={contact}
+                           remove={handleRemove}
               />
           )}
           {isLoading && <CircularProgress/>}
