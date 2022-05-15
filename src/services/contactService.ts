@@ -6,12 +6,9 @@ export const contactAPI = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000' }),
     tagTypes: ['Create'],
     endpoints: (build) => ({
-        getAllContacts: build.query<IContacts[], number>({
-            query: (limit: number = 10) => ({
-                url: `contacts`,
-                params: {
-                    _limit: limit
-                }
+        getAllContacts: build.query<IContacts[], string>({
+            query: (name: string = '') => ({
+                url: `contacts/?q=${name}`,
             }),
             providesTags: result => ['Create']
         }),
@@ -37,6 +34,6 @@ export const contactAPI = createApi({
                 method: 'DELETE',
             }),
             invalidatesTags: ['Create']
-        }),
+        })
     }),
 });
