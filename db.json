@@ -1,11 +1,6 @@
 {
   "contacts": [
     {
-      "id": 2,
-      "name": "Tom",
-      "email": "Tom@mail.com"
-    },
-    {
       "id": 3,
       "name": "Tim",
       "email": "Tim@mail.com"
@@ -71,9 +66,14 @@
       "email": "Stev@mail.com"
     },
     {
-      "name": "TestName2",
-      "email": "testMail2@mail.ru",
+      "name": "Anna",
+      "email": "Anna@mail.com",
       "id": 16
+    },
+    {
+      "name": "TestName",
+      "email": "testMail@mail.ru",
+      "id": 17
     }
   ]
 }
